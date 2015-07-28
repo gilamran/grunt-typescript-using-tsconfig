@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gilamran/grunt-typescript-using-tsconfig.git"
+    "url": "git@github.com:gilamran/grunt-typescript-using-tsconfig.git"
   },
   "keywords": [
     "gruntplugin",
