@@ -1,5 +1,7 @@
-## grunt-typescript-using-tsconfig
-This is a grunt task that will help you compile your TypeScript projects using the tsconfig.json file.
+## TypeScript Compilation Task for GruntJS using tsconfig.json
+grunt-typescript-using-tsconfig is an npm package that compiles TypeScript projects in GruntJS. It's a simple wrapper over tsc command-line compiler, with two simple concepts.
+1. Using the tsconfig.json to configure your project setup. (Comes with a default tsconfig.json)
+2. Supporting filesGlob, so you wont have to update the "file" property every time you add/delete/rename ts files.
 
 #### Basic configuration
 ```js
