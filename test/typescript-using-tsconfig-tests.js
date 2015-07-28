@@ -28,9 +28,26 @@ exports.typescriptUsingTsConfig = {
 		done();
 	},
   noTsConfigProject: function (test) {
-		var actual = grunt.file.read('tmp/basic.html');
-		var expected = grunt.file.read('test/expected/basic.html');
-		test.equal(actual, expected, 'should process a very BASIC vm file into html file.');
+		var actualJs = grunt.file.read('tmp/noTsConfigProject/dummy.js');
+		var expectedJs = grunt.file.read('test/expected/noTsConfigProject/dummy.js');
+		test.equal(actualJs, expectedJs, 'should compile a typescript file when no tsconfig.json present.');
+
+		var actualTsConfig = grunt.file.read('tmp/noTsConfigProject/tsconfig.json');
+		var expectedTsConfig = grunt.file.read('test/expected/noTsConfigProject/tsconfig.json');
+		test.equal(actualTsConfig, expectedTsConfig, 'should compile a typescript file when no tsconfig.json present.');
+		test.done();
+	},
+  basicConfigProject: function (test) {
+		var actualJs1 = grunt.file.read('tmp/basicConfigProject/dummy1.js');
+		var expectedJs1 = grunt.file.read('test/expected/basicConfigProject/dummy1.js');
+		var actualJs2 = grunt.file.read('tmp/basicConfigProject/dummy1.js');
+		var expectedJs2 = grunt.file.read('test/expected/basicConfigProject/dummy1.js');
+		test.equal(actualJs1, expectedJs1, 'should compile 2 typescript files according to the given filesGlob.');
+		test.equal(actualJs2, expectedJs2, 'should compile 2 typescript files according to the given filesGlob.');
+
+		var actualTsConfig = grunt.file.read('tmp/basicConfigProject/tsconfig.json');
+		var expectedTsConfig = grunt.file.read('test/expected/basicConfigProject/tsconfig.json');
+		test.equal(actualTsConfig, expectedTsConfig, 'should compile a typescript project according to the given tsconfig.json.');
 		test.done();
 	}
 };

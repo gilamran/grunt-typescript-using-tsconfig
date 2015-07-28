@@ -3,6 +3,7 @@ var typescript = require('typescript');
 var path = require('path');
 var fs = require('fs');
 var tsconfigGlob = require('tsconfig-glob');
+var chalk = require('chalk');
 
 module.exports = function (grunt) {
 
@@ -14,6 +15,7 @@ module.exports = function (grunt) {
 
       if (!grunt.file.exists(tsconfigPath)) {
         grunt.file.write(tsconfigPath, JSON.stringify(options.defaultTsConfig, null, 2));
+        console.log('New tsconfig.json was created at', tsconfigPath);
       }
 
       tsconfigGlob({
@@ -43,8 +45,10 @@ module.exports = function (grunt) {
 
     function compileTypeScript(doneCallback) {
       var tsc = getTypeScriptCompilerBinPath();
+      console.log('Running', process.execPath, tsc, '--project', options.rootDir);
       grunt.util.spawn({
-        cmd: tsc
+        cmd: process.execPath,
+        args: [tsc, '--project', options.rootDir]
       }, function (error, result, code) {
         if (code === 0) {
           console.log(chalk.green("TypeScript build success"));

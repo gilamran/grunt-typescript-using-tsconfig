@@ -5,12 +5,12 @@
     "removeComments": false,
     "declaration": false,
     "sourceMap": false,
-    "outDir": "./tmp/noTsConfigProject"
+    "outDir": "./"
   },
   "filesGlob": [
-    "./**/*.ts"
+    "**/*.ts"
   ],
   "files": [
-    "./dummy.ts"
+    "dummy.ts"
   ]
 }

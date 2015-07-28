@@ -27,13 +27,21 @@ module.exports = function (grunt) {
     },
 
     clean: {
-      tests: ['tmp', './test/fixtures/noTsConfigProject/tsconfig.json']
+      tests: ['tmp']
+    },
+
+    copy: {
+      tests: {
+        files: [
+          {expand: true, cwd: 'test/fixtures', src:['**'], dest: 'tmp/'}
+        ]
+      }
     },
 
     typescriptUsingTsConfig: {
       noTsConfigProject: {
         options: {
-          rootDir: "./test/fixtures/noTsConfigProject",
+          rootDir: "./tmp/noTsConfigProject",
           defaultTsConfig: {
             "compilerOptions": {
               "target": "es5",
@@ -41,13 +49,18 @@ module.exports = function (grunt) {
               "removeComments": false,
               "declaration": false,
               "sourceMap": false,
-              "outDir": "./tmp/noTsConfigProject"
+              "outDir": "./"
             },
             "filesGlob": [
-              "./**/*.ts"
+              "**/*.ts"
             ],
             "files": []
           }
+        }
+      },
+      basicConfigProject: {
+        options: {
+          rootDir: "./tmp/basicConfigProject"
         }
       }
     },
@@ -60,7 +73,7 @@ module.exports = function (grunt) {
 
   grunt.loadTasks('tasks');
 
-  grunt.registerTask('test', ['clean', 'typescriptUsingTsConfig', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'copy', 'typescriptUsingTsConfig', 'nodeunit']);
 
   grunt.registerTask('default', ['jshint', 'test']);
 };
