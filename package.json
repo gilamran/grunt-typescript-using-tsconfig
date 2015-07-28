@@ -1,7 +1,7 @@
 {
   "name": "grunt-typescript-using-tsconfig",
   "version": "0.6.0",
-  "description": "A Grunt task that compiles typescript projects using the tsconfig, with support for filesGlob",
+  "description": "Grunt task that compiles typescript projects using the tsconfig, with support for filesGlob",
   "main": "Gruntfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
