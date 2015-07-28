@@ -1,0 +1,39 @@
+{
+  "name": "grunt-typescript-using-tsconfig",
+  "version": "0.6.0",
+  "description": "A Grunt task that compiles typescript projects using the tsconfig, with support for filesGlob",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gilamran/grunt-typescript-using-tsconfig.git"
+  },
+  "keywords": [
+    "gruntplugin",
+    "typescript",
+    "tsc",
+    "tsconfig"
+  ],
+  "author": "Gil Amran",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-debug-task": "^0.1.5",
+    "jshint-stylish": "^1.0.1",
+    "load-grunt-tasks": "~0.3.0"
+  },
+  "dependencies": {
+    "chalk": "^1.1.0",
+    "tsconfig-glob": "^0.1.3",
+    "typescript": "^1.5.3"
+  },
+  "bugs": {
+    "url": "https://github.com/gilamran/grunt-typescript-using-tsconfig/issues"
+  },
+  "homepage": "https://github.com/gilamran/grunt-typescript-using-tsconfig#readme"
+}
