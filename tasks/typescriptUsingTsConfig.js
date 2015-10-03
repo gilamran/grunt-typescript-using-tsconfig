@@ -26,6 +26,11 @@ module.exports = function (grunt) {
     }
 
     function getTypeScriptCompilerBinPath() {
+      var customCompilerPath = options.customCompilerPath;
+      if (customCompilerPath && fs.existsSync(customCompilerPath)) {
+        return customCompilerPath;
+      }
+
       var ownRoot = path.resolve(path.dirname((module).filename), '..');
       var projectRoot = path.resolve(ownRoot, '..', '..');
       var binSub = path.join('node_modules', 'typescript', 'bin', 'tsc');
