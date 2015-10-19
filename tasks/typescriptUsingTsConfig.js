@@ -18,11 +18,16 @@ module.exports = function (grunt) {
         console.log('New tsconfig.json was created at', tsconfigPath);
       }
 
-      tsconfigGlob({
-        configPath: options.rootDir,
-        cwd: process.cwd(),
-        indent: 2
-      });
+      var tsconfigContents = grunt.file.readJSON(tsconfigPath);
+
+      // only call tsconfigGlob if there is a glob pattern in tsconfig.json
+      if (tsconfigContents.filesGlob) {
+        tsconfigGlob({
+          configPath: options.rootDir,
+          cwd: process.cwd(),
+          indent: 2
+        });
+      }
     }
 
     function getTypeScriptCompilerBinPath() {
