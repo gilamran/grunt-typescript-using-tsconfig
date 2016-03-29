@@ -10,19 +10,20 @@ grunt-typescript-using-tsconfig is an npm package that compiles TypeScript proje
     typescriptUsingTsConfig: {
       basic: {
         options: {
-          rootDir: "./" // optional
+          rootPath: "./" // optional
         }
       }
+    }
 ```
 
 #### defaultTsConfig
-If you don't have a tsconfig.json file in the rootDir, a default tsconfig.json will be created for you. You can also define the defaultTsConfig file:
+If you don't have a tsconfig.json file in the rootPath, a default tsconfig.json will be created for you. You can also define the defaultTsConfig file:
 
 ```js
     typescriptUsingTsConfig: {
       basic: {
         options: {
-          rootDir: "./",             // optional
+          rootPath: "./",             // optional
           defaultTsConfig: {         // optional
             "compilerOptions": {
               "target": "es5",
@@ -39,6 +40,7 @@ If you don't have a tsconfig.json file in the rootDir, a default tsconfig.json w
           }
         }
       }
+    }
 ```
 
 #### filesGlob

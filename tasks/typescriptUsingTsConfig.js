@@ -4,14 +4,22 @@ var path = require('path');
 var fs = require('fs');
 var tsconfigGlob = require('tsconfig-glob');
 var chalk = require('chalk');
+var pathParent = "..";
 
 module.exports = function (grunt) {
 
   grunt.registerMultiTask('typescriptUsingTsConfig', 'Compiling TypeScript using tsconfig.json', function () {
 
+    function getPath(rootPath) {
+      var isFile = grunt.file.isFile(rootPath);
+      if (isFile === true) {
+        return path.resolve(rootPath, pathParent);
+      }
+      return rootPath;
+    }
 
     function processTsConfig() {
-      var tsconfigPath = path.join(options.rootDir, 'tsconfig.json');
+      var tsconfigPath = options.rootPath;
 
       if (!grunt.file.exists(tsconfigPath)) {
         grunt.file.write(tsconfigPath, JSON.stringify(options.defaultTsConfig, null, 2));
@@ -19,7 +27,7 @@ module.exports = function (grunt) {
       }
 
       tsconfigGlob({
-        configPath: options.rootDir,
+        configPath: getPath(options.rootPath),
         cwd: process.cwd(),
         indent: 2
       });
@@ -31,8 +39,8 @@ module.exports = function (grunt) {
         return customCompilerPath;
       }
 
-      var ownRoot = path.resolve(path.dirname((module).filename), '..');
-      var projectRoot = path.resolve(ownRoot, '..', '..');
+      var ownRoot = path.resolve(path.dirname((module).filename), pathParent);
+      var projectRoot = path.resolve(ownRoot, pathParent, pathParent);
       var binSub = path.join('node_modules', 'typescript', 'bin', 'tsc');
 
       var projectCompilerPath = path.join(projectRoot, binSub);
@@ -50,10 +58,10 @@ module.exports = function (grunt) {
 
     function compileTypeScript(doneCallback) {
       var tsc = getTypeScriptCompilerBinPath();
-      console.log('Running', process.execPath, tsc, '--project', options.rootDir);
+      console.log('Running', process.execPath, tsc, '--project', options.rootPath);
       grunt.util.spawn({
         cmd: process.execPath,
-        args: [tsc, '--project', options.rootDir]
+        args: [tsc, '--project', options.rootPath]
       }, function (error, result, code) {
         if (code === 0) {
           console.log(chalk.green("TypeScript build success"));
@@ -69,7 +77,7 @@ module.exports = function (grunt) {
     }
 
     var options = this.options({
-      rootDir: "./",
+      rootPath: "./",
       defaultTsConfig: {
         "compilerOptions": {
           "target": "es5",
