@@ -41,7 +41,7 @@ module.exports = function (grunt) {
     typescriptUsingTsConfig: {
       noTsConfigProject: {
         options: {
-          rootDir: "./tmp/noTsConfigProject",
+          rootPath: "./tmp/noTsConfigProject",
           defaultTsConfig: {
             "compilerOptions": {
               "target": "es5",
@@ -60,7 +60,12 @@ module.exports = function (grunt) {
       },
       basicConfigProject: {
         options: {
-          rootDir: "./tmp/basicConfigProject"
+          rootPath: "./tmp/basicConfigProject"
+        }
+      },
+      pathWithExplicitTsConfig: {
+        options: {
+          rootPath: "./tmp/pathWithExplicitTsConfig/customTsConfig.json"
         }
       }
     },

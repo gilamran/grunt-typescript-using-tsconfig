@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
+    "listFiles": true,
     "target": "es5",
-    "module": "commonjs",
+    "module": "amd",
     "removeComments": false,
-    "declaration": false,
-    "sourceMap": false,
+    "declaration": true,
+    "sourceMap": true,
     "outDir": "./"
   },
   "filesGlob": [
     "**/*.ts"
   ],
   "files": [
-    "dummy.ts"
   ]
 }
