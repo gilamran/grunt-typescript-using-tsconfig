@@ -34,7 +34,7 @@ module.exports = function (grunt) {
       var config = {
         configPath: path.dirname(tsconfigPath),
         configFileName: path.basename(tsconfigPath),
-        intend: 2
+        indent: 2
       };
 
       tsconfigGlob(config);

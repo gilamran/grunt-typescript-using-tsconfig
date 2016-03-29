@@ -59,7 +59,7 @@ exports.typescriptUsingTsConfig = {
     test.equal(actualJs2, expectedJs2, 'should compile 2 typescript files with a custom tsconfig file.');
 
     var actualTsConfig = grunt.file.read('tmp/pathWithExplicitTsConfig/customTsConfig.json');
-    var expectedTsConfig = grunt.file.read('test/expected/basicConfigProject/customTsConfig.json');
+    var expectedTsConfig = grunt.file.read('test/expected/pathWithExplicitTsConfig/customTsConfig.json');
     test.equal(actualTsConfig, expectedTsConfig, 'should compile a typescript project according to the given tsconfig.json.');
     test.done();
   }
