@@ -5,6 +5,7 @@ var fs = require('fs');
 var tsconfigGlob = require('tsconfig-glob');
 var chalk = require('chalk');
 var pathParent = "..";
+var defaultTsConfigName = "tsconfig.json";
 
 module.exports = function (grunt) {
 
@@ -18,8 +19,21 @@ module.exports = function (grunt) {
       return rootPath;
     }
 
+    function determineTsconfig(rootPath) {
+      var isFile = grunt.file.isFile(rootPath),
+          isDir = grunt.file.isDir(rootPath);
+
+      if (isFile === true) {
+        return rootPath;
+      }
+      if (isDir === true) {
+        return path.join(rootPath, defaultTsConfigName);
+      }
+      throw new Error("can not determine tsconfig.json, invalid state");
+    }
+
     function processTsConfig() {
-      var tsconfigPath = options.rootPath;
+      var tsconfigPath = determineTsconfig(options.rootPath);
 
       if (!grunt.file.exists(tsconfigPath)) {
         grunt.file.write(tsconfigPath, JSON.stringify(options.defaultTsConfig, null, 2));
