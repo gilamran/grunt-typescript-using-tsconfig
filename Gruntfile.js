@@ -62,6 +62,11 @@ module.exports = function (grunt) {
         options: {
           rootPath: "./tmp/basicConfigProject"
         }
+      },
+      pathWithExplicitTsConfig: {
+        options: {
+          rootPath: "./tmp/pathWithExplicitTsConfig/customTsConfig.json"
+        }
       }
     },
 

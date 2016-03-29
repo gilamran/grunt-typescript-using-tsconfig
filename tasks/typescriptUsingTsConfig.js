@@ -10,15 +10,6 @@ var defaultTsConfigName = "tsconfig.json";
 module.exports = function (grunt) {
 
   grunt.registerMultiTask('typescriptUsingTsConfig', 'Compiling TypeScript using tsconfig.json', function () {
-
-    function getPath(rootPath) {
-      var isFile = grunt.file.isFile(rootPath);
-      if (isFile === true) {
-        return path.resolve(rootPath, pathParent);
-      }
-      return rootPath;
-    }
-
     function determineTsconfig(rootPath) {
       var isFile = grunt.file.isFile(rootPath),
           isDir = grunt.file.isDir(rootPath);
@@ -29,22 +20,31 @@ module.exports = function (grunt) {
       if (isDir === true) {
         return path.join(rootPath, defaultTsConfigName);
       }
-      throw new Error("can not determine tsconfig.json, invalid state");
+      grunt.fail.warn("Can not determine tsconfig.json, invalid state");
+    }
+
+    function createTsConigFileIfNotPresent(tsconfigPath) {
+      if (!grunt.file.exists(tsconfigPath)) {
+        grunt.file.write(tsconfigPath, JSON.stringify(options.defaultTsConfig, null, 2));
+        console.log('New tsconfig.json was created at', tsconfigPath);
+      }
+    }
+
+    function processTsConfigGlobbing(tsconfigPath) {
+      var config = {
+        configPath: path.dirname(tsconfigPath),
+        configFileName: path.basename(tsconfigPath),
+        intend: 2
+      };
+
+      tsconfigGlob(config);
     }
 
     function processTsConfig() {
       var tsconfigPath = determineTsconfig(options.rootPath);
 
-      if (!grunt.file.exists(tsconfigPath)) {
-        grunt.file.write(tsconfigPath, JSON.stringify(options.defaultTsConfig, null, 2));
-        console.log('New tsconfig.json was created at', tsconfigPath);
-      }
-
-      tsconfigGlob({
-        configPath: getPath(options.rootPath),
-        cwd: process.cwd(),
-        indent: 2
-      });
+      createTsConigFileIfNotPresent(tsconfigPath);
+      processTsConfigGlobbing(tsconfigPath);
     }
 
     function getTypeScriptCompilerBinPath() {
@@ -71,11 +71,13 @@ module.exports = function (grunt) {
     }
 
     function compileTypeScript(doneCallback) {
-      var tsc = getTypeScriptCompilerBinPath();
-      console.log('Running', process.execPath, tsc, '--project', options.rootPath);
+      var tsc = getTypeScriptCompilerBinPath(),
+          tsconfigPath = determineTsconfig(options.rootPath);
+
+      console.log('Running', process.execPath, tsc, '--project', tsconfigPath);
       grunt.util.spawn({
         cmd: process.execPath,
-        args: [tsc, '--project', options.rootPath]
+        args: [tsc, '--project', tsconfigPath]
       }, function (error, result, code) {
         if (code === 0) {
           console.log(chalk.green("TypeScript build success"));

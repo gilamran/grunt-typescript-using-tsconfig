@@ -40,8 +40,8 @@ exports.typescriptUsingTsConfig = {
   basicConfigProject: function (test) {
 		var actualJs1 = grunt.file.read('tmp/basicConfigProject/dummy1.js');
 		var expectedJs1 = grunt.file.read('test/expected/basicConfigProject/dummy1.js');
-		var actualJs2 = grunt.file.read('tmp/basicConfigProject/dummy1.js');
-		var expectedJs2 = grunt.file.read('test/expected/basicConfigProject/dummy1.js');
+		var actualJs2 = grunt.file.read('tmp/basicConfigProject/dummy2.js');
+		var expectedJs2 = grunt.file.read('test/expected/basicConfigProject/dummy2.js');
 		test.equal(actualJs1, expectedJs1, 'should compile 2 typescript files according to the given filesGlob.');
 		test.equal(actualJs2, expectedJs2, 'should compile 2 typescript files according to the given filesGlob.');
 
@@ -49,5 +49,18 @@ exports.typescriptUsingTsConfig = {
 		var expectedTsConfig = grunt.file.read('test/expected/basicConfigProject/tsconfig.json');
 		test.equal(actualTsConfig, expectedTsConfig, 'should compile a typescript project according to the given tsconfig.json.');
 		test.done();
-	}
+	},
+  pathWithExplicitTsConfig: function (test) {
+    var actualJs1 = grunt.file.read('tmp/pathWithExplicitTsConfig/dummy1.js');
+    var expectedJs1 = grunt.file.read('test/expected/pathWithExplicitTsConfig/dummy1.js');
+    var actualJs2 = grunt.file.read('tmp/pathWithExplicitTsConfig/dummy2.js');
+    var expectedJs2 = grunt.file.read('test/expected/pathWithExplicitTsConfig/dummy2.js');
+    test.equal(actualJs1, expectedJs1, 'should compile 2 typescript files with a custom tsconfig file.');
+    test.equal(actualJs2, expectedJs2, 'should compile 2 typescript files with a custom tsconfig file.');
+
+    var actualTsConfig = grunt.file.read('tmp/pathWithExplicitTsConfig/customTsConfig.json');
+    var expectedTsConfig = grunt.file.read('test/expected/basicConfigProject/customTsConfig.json');
+    test.equal(actualTsConfig, expectedTsConfig, 'should compile a typescript project according to the given tsconfig.json.');
+    test.done();
+  }
 };

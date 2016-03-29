@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "listFiles": true,
+    "target": "es5",
+    "module": "amd",
+    "removeComments": true,
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "./"
+  },
+  "filesGlob": [
+    "**/*.ts"
+  ],
+  "files": [
+  ]
+}
