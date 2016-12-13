@@ -42,6 +42,6 @@ If you don't have a tsconfig.json file in the rootDir, a default tsconfig.json w
 ```
 
 #### filesGlob
-You can specify a "filesGlob" property in the tsconfig.json file and the task will fill the "files" property automatically before the compilcation.
+You can specify a "filesGlob" property in the tsconfig.json file and the task will fill the "files" property automatically before the compilation.
 
 
